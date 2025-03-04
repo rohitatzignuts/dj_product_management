@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "categories",
     "subcategories",
     "tasks",
+    "drf_yasg",
 ]
 
 REST_FRAMEWORK = {
@@ -53,6 +54,10 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+    "DEFAULT_THROTTLE_RATES": {
+        "user": "10/minute",  # 10 requests per minute per user
+        "anon": "5/minute",  # 5 requests per minute for unauthenticated users
+    },
 }
 
 SIMPLE_JWT = {
@@ -79,8 +84,33 @@ MIDDLEWARE = [
 DJOSER = {
     "SERIALIZERS": {
         "user_create": "products.serializers.CustomUserCreateSerializer",
-    }
+    },
+    "PASSWORD_RESET_CONFIRM_URL": "password-reset/{uid}/{token}/",
+    "SEND_ACTIVATION_EMAIL": False,
+    "SEND_CONFIRMATION_EMAIL": False,
 }
+
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": "Enter your JWT token in the format **JWT <token>**",
+        }
+    },
+}
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "sandbox.smtp.mailtrap.io"
+EMAIL_HOST_USER = "65a395a6efca18"
+EMAIL_HOST_PASSWORD = "e868ac1c767589"
+EMAIL_PORT = "2525"
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+DEFAULT_FROM_EMAIL = "noreply@django.com"
+
 
 ROOT_URLCONF = "product_mgmt.urls"
 

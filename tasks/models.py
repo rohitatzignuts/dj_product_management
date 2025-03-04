@@ -16,7 +16,7 @@ class Task(models.Model):
         ("completed", "Completed"),
     ]
 
-    title = models.CharField(max_length=255, blank=True)
+    title = models.CharField(max_length=255, blank=False)
     description = models.TextField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="tasks")
     assigned_user = models.ForeignKey(

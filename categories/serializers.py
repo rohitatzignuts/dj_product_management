@@ -2,6 +2,7 @@ from djoser.serializers import UserCreateSerializer
 from django.contrib.auth.models import User
 from categories.models import Category
 from rest_framework import serializers
+from subcategories.serializers import SubCategorySerializer
 
 
 class CustomUserCreateSerializer(UserCreateSerializer):
@@ -11,6 +12,9 @@ class CustomUserCreateSerializer(UserCreateSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
+
+    subcategories = SubCategorySerializer(many=True, read_only=True)
+
     class Meta:
         model = Category
         fields = "__all__"
