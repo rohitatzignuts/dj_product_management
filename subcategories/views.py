@@ -15,6 +15,7 @@ class SubCategoriesList(APIView):
     throttle_classes = [UserRateThrottle]
 
     @swagger_auto_schema(
+        tags=["Sub Categories"],
         operation_summary="List all subcategories",
         operation_description="Returns a list of all subcategories available in the database.",
         responses={200: openapi.Response("Successful response")},
@@ -25,6 +26,7 @@ class SubCategoriesList(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(
+        tags=["Sub Categories"],
         operation_summary="Add a new subcategory",
         operation_description="Creates a new subcategory in the database.",
         request_body=openapi.Schema(
@@ -33,7 +35,7 @@ class SubCategoriesList(APIView):
                 "name": openapi.Schema(type=openapi.TYPE_STRING),
                 "description": openapi.Schema(type=openapi.TYPE_STRING),
                 "is_active": openapi.Schema(type=openapi.TYPE_BOOLEAN),
-                "category": openapi.Schema(type=openapi.TYPE_INTEGER),
+                "parent_category": openapi.Schema(type=openapi.TYPE_INTEGER),
             },
         ),
         responses={200: openapi.Response("Successful response")},
@@ -60,6 +62,7 @@ class SubCategoryDetail(APIView):
             raise Http404
 
     @swagger_auto_schema(
+        tags=["Sub Categories"],
         operation_summary="Get a subcategory",
         operation_description="Returns a subcategory by its ID.",
         responses={200: openapi.Response("Successful response")},
@@ -70,6 +73,7 @@ class SubCategoryDetail(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(
+        tags=["Sub Categories"],
         operation_summary="Update a subcategory",
         operation_description="Updates a subcategory in the database.",
         request_body=openapi.Schema(
@@ -78,7 +82,7 @@ class SubCategoryDetail(APIView):
                 "name": openapi.Schema(type=openapi.TYPE_STRING),
                 "description": openapi.Schema(type=openapi.TYPE_STRING),
                 "is_active": openapi.Schema(type=openapi.TYPE_BOOLEAN),
-                "category": openapi.Schema(type=openapi.TYPE_INTEGER),
+                "parent_category": openapi.Schema(type=openapi.TYPE_INTEGER),
             },
         ),
         responses={200: openapi.Response("Successful response")},
@@ -93,6 +97,7 @@ class SubCategoryDetail(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @swagger_auto_schema(
+        tags=["Sub Categories"],
         operation_summary="Delete a subcategory",
         operation_description="Deletes a subcategory by its ID.",
         responses={204: openapi.Response("Successful response")},

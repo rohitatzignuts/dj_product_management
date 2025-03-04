@@ -83,7 +83,7 @@ MIDDLEWARE = [
 
 DJOSER = {
     "SERIALIZERS": {
-        "user_create": "products.serializers.CustomUserCreateSerializer",
+        "user_create": "categories.serializers.CustomUserCreateSerializer",
     },
     "PASSWORD_RESET_CONFIRM_URL": "password-reset/{uid}/{token}/",
     "SEND_ACTIVATION_EMAIL": False,

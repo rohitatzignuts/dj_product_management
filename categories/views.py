@@ -31,6 +31,7 @@ class CategoriesList(APIView):
     throttle_classes = [UserRateThrottle]
 
     @swagger_auto_schema(
+        tags=["Categories"],
         operation_summary="List all categories",
         operation_description="Returns a list of all categories available in the database.",
         responses={200: openapi.Response("Successful response")},
@@ -41,6 +42,7 @@ class CategoriesList(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(
+        tags=["Categories"],
         operation_summary="Add a new category",
         operation_description="Creates a new category in the database.",
         request_body=openapi.Schema(
@@ -73,6 +75,7 @@ class CategoryDetail(APIView):
             raise Http404
 
     @swagger_auto_schema(
+        tags=["Categories"],
         operation_summary="Get a category",
         operation_description="Returns a category by its ID.",
         responses={200: openapi.Response("Successful response")},
@@ -83,6 +86,7 @@ class CategoryDetail(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(
+        tags=["Categories"],
         operation_summary="Update a category",
         operation_description="Updates a category by its ID.",
         request_body=openapi.Schema(
@@ -105,6 +109,7 @@ class CategoryDetail(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @swagger_auto_schema(
+        tags=["Categories"],
         operation_summary="Delete a category",
         operation_description="Deletes a category by its ID.",
         responses={204: openapi.Response("Successful response")},

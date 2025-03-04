@@ -15,6 +15,7 @@ class ProductsList(APIView):
     throttle_classes = [UserRateThrottle]
 
     @swagger_auto_schema(
+        tags=["Products"],
         operation_summary="List all products",
         operation_description="Returns a list of all products available in the database.",
         responses={200: openapi.Response("Successful response")},
@@ -37,6 +38,7 @@ class ProductsList(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(
+        tags=["Products"],
         operation_summary="Add a new product",
         operation_description="Creates a new product in the database.",
         request_body=openapi.Schema(
@@ -71,6 +73,7 @@ class ProductDetail(APIView):
             raise Http404
 
     @swagger_auto_schema(
+        tags=["Products"],
         operation_summary="Get a product",
         operation_description="Returns a product by its ID.",
         responses={200: openapi.Response("Successful response")},
@@ -81,6 +84,7 @@ class ProductDetail(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(
+        tags=["Products"],
         operation_summary="Update a product",
         operation_description="Updates a product by its ID.",
         request_body=openapi.Schema(
@@ -104,6 +108,7 @@ class ProductDetail(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @swagger_auto_schema(
+        tags=["Products"],
         operation_summary="Delete a product",
         operation_description="Deletes a product by its ID.",
         responses={204: openapi.Response("No content")},

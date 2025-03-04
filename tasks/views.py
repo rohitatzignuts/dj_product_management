@@ -11,6 +11,7 @@ from drf_yasg import openapi
 class TaskList(APIView):
 
     @swagger_auto_schema(
+        tags=["Tasks"],
         operation_summary="List all tasks",
         operation_description="Returns a list of all tasks available in the database.",
         responses={200: openapi.Response("Successful response")},
@@ -32,6 +33,7 @@ class TaskList(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(
+        tags=["Tasks"],
         operation_summary="Add a new task",
         operation_description="Creates a new task in the database.",
         request_body=openapi.Schema(
@@ -42,6 +44,7 @@ class TaskList(APIView):
                 "due_date": openapi.Schema(type=openapi.TYPE_STRING),
                 "status": openapi.Schema(type=openapi.TYPE_STRING),
                 "product": openapi.Schema(type=openapi.TYPE_INTEGER),
+                "assigned_user": openapi.Schema(type=openapi.TYPE_INTEGER),
             },
         ),
         responses={200: openapi.Response("Successful response")},
@@ -64,6 +67,7 @@ class TaskDetail(APIView):
             raise Http404
 
     @swagger_auto_schema(
+        tags=["Tasks"],
         operation_summary="Get a task",
         operation_description="Returns a task by its ID.",
         responses={200: openapi.Response("Successful response")},
@@ -74,6 +78,7 @@ class TaskDetail(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(
+        tags=["Tasks"],
         operation_summary="Update a task",
         operation_description="Updates a task by its ID.",
         request_body=openapi.Schema(
@@ -84,6 +89,7 @@ class TaskDetail(APIView):
                 "due_date": openapi.Schema(type=openapi.TYPE_STRING),
                 "status": openapi.Schema(type=openapi.TYPE_STRING),
                 "product": openapi.Schema(type=openapi.TYPE_INTEGER),
+                "assigned_user": openapi.Schema(type=openapi.TYPE_INTEGER),
             },
         ),
         responses={200: openapi.Response("Successful response")},
@@ -98,6 +104,7 @@ class TaskDetail(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @swagger_auto_schema(
+        tags=["Tasks"],
         operation_summary="Delete a task",
         operation_description="Deletes a task by its ID.",
         responses={204: openapi.Response("Successful response")},
